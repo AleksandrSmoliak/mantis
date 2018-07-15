@@ -6,4 +6,3 @@ def test_del_project(app):
     app.project.del_project_by_index(index)
     new_project = app.project.project_count()
     assert old_project - 1 == new_project
-    
