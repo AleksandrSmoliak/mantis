@@ -9,7 +9,7 @@
 
   "ftp":
   {
-    "host": "http://localhost",
+    "host": "localhost",
     "username": "mantis",
     "password": "mantis"
 
