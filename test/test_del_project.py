@@ -3,6 +3,7 @@ from model.project import Project
 
 
 def test_del_project(app):
+    app.session.login("administrator", "root")
     # открываем страницуц с проектами
     app.project.open_project_page()
     # Получаем количествво созданных проектов

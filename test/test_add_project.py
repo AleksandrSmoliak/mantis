@@ -1,6 +1,7 @@
 from model.project import Project
 
 def test_add_project(app):
+    app.session.login("administrator", "root")
     # Переходим на страницу с проектами
     app.project.open_project_page()
     # Получакем количество созданных проектов
