@@ -18,6 +18,13 @@ class SoapHelper:
         client = Client("http://localhost/mantisbt-2.15.0/api/soap/mantisconnect.php?wsdl")
         return client.service.mc_projects_get_user_accessible(username, password)
 
-    def add_projects(self, username, password, project):
+    def add_projects(self, username, password, pr):
         client = Client("http://localhost/mantisbt-2.15.0/api/soap/mantisconnect.php?wsdl")
+        project = client.factory.create('ProjectData')
+        project.name = pr.name
+        project.description = pr.description
         client.service.mc_project_add(username, password, project)
+
+    def del_projects(self, username, password, project_id):
+        client = Client("http://localhost/mantisbt-2.15.0/api/soap/mantisconnect.php?wsdl")
+        client.service.mc_project_delete(username, password, project_id)

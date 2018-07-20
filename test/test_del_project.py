@@ -1,20 +1,25 @@
 from random import randrange
 from model.project import Project
+import random
+import string
+
+
+def random_projectname(perfix, maxlen):
+    symbols = string.ascii_letters
+    return perfix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
 def test_del_project(app):
-    app.session.login("administrator", "root")
-    # открываем страницуц с проектами
-    app.project.open_project_page()
+    project_name = random_projectname("project_", 10)
     # Получаем количествво созданных проектов по SOAP
     old_project = len(app.soap.get_projects("administrator", "root"))
     # Реализуем предусловие
     if old_project == 0:
-        app.project.create_project(Project(name="Проект1", description="Описание проекта"))
+        app.soap.add_projects("administrator", "root", Project(name=project_name, description="Описание2555"))
     # Герерируем случайный индекс с ограничением по количеству существующих проектов
-    index = randrange(0, old_project)
+    index = randrange(1, old_project)
     # Удаляем проект по индексу
-    app.project.del_project_by_index(index)
+    app.soap.del_projects("administrator", "root", index)
     # Получаем новое значение количества проектов
     new_project = len(app.soap.get_projects("administrator", "root"))
     # Проверяем что количество проектов изменилось
