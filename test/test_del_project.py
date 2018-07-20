@@ -6,8 +6,8 @@ def test_del_project(app):
     app.session.login("administrator", "root")
     # открываем страницуц с проектами
     app.project.open_project_page()
-    # Получаем количествво созданных проектов
-    old_project = app.project.project_count()
+    # Получаем количествво созданных проектов по SOAP
+    old_project = len(app.soap.get_projects("administrator", "root"))
     # Реализуем предусловие
     if old_project == 0:
         app.project.create_project(Project(name="Проект1", description="Описание проекта"))
@@ -16,6 +16,6 @@ def test_del_project(app):
     # Удаляем проект по индексу
     app.project.del_project_by_index(index)
     # Получаем новое значение количества проектов
-    new_project = app.project.project_count()
+    new_project = len(app.soap.get_projects("administrator", "root"))
     # Проверяем что количество проектов изменилось
     assert old_project - 1 == new_project

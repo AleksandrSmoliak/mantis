@@ -7,8 +7,8 @@ class ProjectHelper:
     def open_project_page(self):
         wd = self.app.wd
         if not (wd.current_url.endswith("/manage_proj_create_page.php")):
-            wd.find_element_by_xpath("//ul[@class='nav nav-list']/li[7]/a").click()
-            wd.find_element_by_link_text("Управление проектами").click()
+            wd.find_element_by_xpath("//div[@id='main-container']/div[@id='sidebar']/ul[@class='nav nav-list']/li[7]/a").click()
+        wd.find_element_by_xpath("//div[@class='row']/ul/li[3]/a").click()
 
     def create_project(self, project):
         wd = self.app.wd
